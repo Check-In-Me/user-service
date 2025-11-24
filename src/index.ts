@@ -1,7 +1,15 @@
 import express, { type Application } from 'express';
+import dotenv from "dotenv";
+import connetcDB from './config/db.ts';
+
+
+dotenv.config();
+connetcDB(); 
 
 const app: Application = express();
 const port = process.env.PORT || 5000;
+
+
 
 //middleware
 app.use(express.json());
