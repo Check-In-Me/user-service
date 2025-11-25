@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import User from "../models/userModel";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 //register client user
 export const register = async (req: Request, res: Response) => {
@@ -17,12 +18,14 @@ export const register = async (req: Request, res: Response) => {
             return res.status(400).json({ message: "email already registered" });
         }
 
+        const hashPassword = await bcrypt.hash(password,10);
+
         console.log(req.body);
 
         const user = await User.create({
             name,
             email,
-            password,
+            password: hashPassword,
             role: role || "user",
             kycStatus: "pending"
         });
@@ -47,8 +50,8 @@ export const register = async (req: Request, res: Response) => {
         });
 
 
-    } catch (error) {
-        console.error("registerUser error:", error);
+    } catch (error: any) {
+        console.error("registerUser error:", error );
         res.status(500).json({ message: error.message });
     }
 

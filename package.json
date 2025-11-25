@@ -7,6 +7,7 @@
   "author": "VishSeran <vishwa.sovis@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.5",
     "@types/jsonwebtoken": "^9.0.10",
